@@ -35,12 +35,12 @@ public class SimpleJDBCRepository {
         }
     }
 
-    public Long createUser(String firstName, String lastName, int age) {
+    public Long createUser(User user) {
         try {
             ps = connection.prepareStatement(CREATE_USER, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, firstName);
-            ps.setString(2, lastName);
-            ps.setInt(3, age);
+            ps.setString(1, user.getFirstName());
+            ps.setString(2, user.getLastName());
+            ps.setInt(3, user.getAge());
             int rowsAffected = ps.executeUpdate();
 
             if (rowsAffected == 1) {
@@ -101,7 +101,7 @@ public class SimpleJDBCRepository {
         return null;
     }
 
-    public List<User> findAllUsers() {
+    public List<User> findAllUser() {
         List<User> users = new ArrayList<>();
         try {
             st = connection.createStatement();
