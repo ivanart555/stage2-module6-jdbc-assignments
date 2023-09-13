@@ -29,7 +29,7 @@ public class SimpleJDBCRepository {
 
     public SimpleJDBCRepository() {
         try {
-            connection = CustomDataSource.getInstance(PropertiesLoader.loadPropertiesFromFile("app.properties")).getConnection();
+            connection = CustomDataSource.getInstance().getConnection();
         } catch (SQLException e) {
             LOGGER.warning("Failed to get connection!");
         }
