@@ -27,6 +27,11 @@ public class SimpleJDBCRepository {
     private static final String FIND_USER_BY_NAME = "SELECT * FROM myusers WHERE firstname = ?";
     private static final String FIND_ALL_USERS = "SELECT * FROM myusers";
 
+    private static final String ID = "id";
+    private static final String FIRSTNAME = "firstname";
+    private static final String LASTNAME = "lastname";
+    private static final String AGE = "age";
+
     public SimpleJDBCRepository() {
         try {
             connection = CustomDataSource.getInstance().getConnection();
@@ -65,10 +70,10 @@ public class SimpleJDBCRepository {
 
             if (resultSet.next()) {
                 return new User(
-                        resultSet.getLong("id"),
-                        resultSet.getString("firstname"),
-                        resultSet.getString("lastname"),
-                        resultSet.getInt("age")
+                        resultSet.getLong(ID),
+                        resultSet.getString(FIRSTNAME),
+                        resultSet.getString(LASTNAME),
+                        resultSet.getInt(AGE)
                 );
             }
         } catch (SQLException e) {
@@ -87,10 +92,10 @@ public class SimpleJDBCRepository {
 
             if (resultSet.next()) {
                 return new User(
-                        resultSet.getLong("id"),
-                        resultSet.getString("firstname"),
-                        resultSet.getString("lastname"),
-                        resultSet.getInt("age")
+                        resultSet.getLong(ID),
+                        resultSet.getString(FIRSTNAME),
+                        resultSet.getString(LASTNAME),
+                        resultSet.getInt(AGE)
                 );
             }
         } catch (SQLException e) {
@@ -109,10 +114,10 @@ public class SimpleJDBCRepository {
 
             while (resultSet.next()) {
                 users.add(new User(
-                        resultSet.getLong("id"),
-                        resultSet.getString("firstname"),
-                        resultSet.getString("lastname"),
-                        resultSet.getInt("age")
+                        resultSet.getLong(ID),
+                        resultSet.getString(FIRSTNAME),
+                        resultSet.getString(LASTNAME),
+                        resultSet.getInt(AGE)
                 ));
             }
         } catch (SQLException e) {

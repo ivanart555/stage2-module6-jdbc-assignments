@@ -10,15 +10,14 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.SQLFeatureNotSupportedException;
 import java.util.Properties;
 import java.util.logging.Logger;
 
 @Getter
 @Setter
 public class CustomDataSource implements DataSource {
-    private static volatile CustomDataSource instance;
-    private static final Logger LOGGER = Logger.getLogger(SimpleJDBCRepository.class.getName());
+    private static CustomDataSource instance;
+    private static final Logger LOGGER = Logger.getLogger(CustomDataSource.class.getName());
     private final String driver;
     private final String url;
     private final String name;
@@ -29,7 +28,6 @@ public class CustomDataSource implements DataSource {
         this.url = url;
         this.password = password;
         this.name = name;
-        instance = this;
     }
 
 
@@ -73,12 +71,12 @@ public class CustomDataSource implements DataSource {
 
     @Override
     public void setLogWriter(PrintWriter out) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setLoginTimeout(int seconds) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
