@@ -31,24 +31,20 @@ public class CustomDataSource implements DataSource {
     }
 
 
-    public static CustomDataSource getInstance() {
+    public static synchronized CustomDataSource getInstance() {
         if (instance == null) {
-            synchronized (CustomDataSource.class) {
-                if (instance == null) {
-                    try {
-                        Properties properties = new Properties();
-                        properties.load(
-                                CustomDataSource.class.getClassLoader().getResourceAsStream("app.properties")
-                        );
-                        instance = new CustomDataSource(
-                                properties.getProperty("postgres.driver"),
-                                properties.getProperty("postgres.url"),
-                                properties.getProperty("postgres.name"),
-                                properties.getProperty("postgres.password"));
-                    } catch (IOException e) {
-                        LOGGER.warning("Failed to create datasource!");
-                    }
-                }
+            try {
+                Properties properties = new Properties();
+                properties.load(
+                        CustomDataSource.class.getClassLoader().getResourceAsStream("app.properties")
+                );
+                instance = new CustomDataSource(
+                        properties.getProperty("postgres.driver"),
+                        properties.getProperty("postgres.url"),
+                        properties.getProperty("postgres.name"),
+                        properties.getProperty("postgres.password"));
+            } catch (IOException e) {
+                LOGGER.warning("Failed to create datasource!");
             }
         }
         return instance;
